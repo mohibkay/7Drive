@@ -1,4 +1,3 @@
-import "./App.css";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
@@ -6,6 +5,7 @@ import SignIn from "./pages/SignIn";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import LoggedInRoute from "./components/auth/LoggedInRoute";
 import Profile from "./pages/Profile";
+import "./App.css";
 
 function App() {
   return (

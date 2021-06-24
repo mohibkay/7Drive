@@ -1,0 +1,30 @@
+.folder-btn {
+  width: 250px;
+  margin: 1rem !important;
+  margin-right: 2rem;
+}
+.horizontal-dots {
+  display: none;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+/* .folder-btn:hover .horizontal-dots {
+  display: inline;
+} */
+
+/* .option-modal {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+} */
+
+#modal-parent {
+  position: relative !important;
+}
+
+#option-modal {
+  position: absolute !important;
+  top: 10px !important;
+  /* right: 0 !important; */
+}
