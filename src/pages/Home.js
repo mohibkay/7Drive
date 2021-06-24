@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link, useHistory, useParams, useLocation } from "react-router-dom";
 import AddFile from "../components/drive/AddFile";
 import AddFolderBtn from "../components/drive/AddFolderBtn";
+import File from "../components/drive/File";
 import Folder from "../components/drive/Folder";
 import FolderBreadcumbs from "../components/layout/FolderBreadcumbs";
 import Navbar from "../components/layout/Navbar";
@@ -13,7 +14,10 @@ export default function Home() {
   const history = useHistory();
   const { folderId } = useParams();
   const { state = {} } = useLocation();
-  const { folder, childFolders } = useFolder(folderId, state.folder);
+  const { folder, childFolders, childFiles } = useFolder(
+    folderId,
+    state.folder
+  );
 
   return (
     <>
@@ -24,6 +28,7 @@ export default function Home() {
           <AddFile currentFolder={folder} />
           <AddFolderBtn currentFolder={folder} />
         </div>
+
         {childFolders.length > 0 && (
           <div className="d-flex flex-wrap">
             {childFolders.map((childFolder) => (
@@ -36,6 +41,24 @@ export default function Home() {
               </div>
             ))}
           </div>
+        )}
+
+        {childFolders.length > 0 && childFiles.length > 0 && <hr />}
+
+        {childFiles.length > 0 && (
+          <Container className="d-flex flex-wrap">
+            <Row>
+              {childFiles.map((childFile) => (
+                <Col
+                  key={childFile.id}
+                  className="p-2"
+                  style={{ maxWidth: "250px" }}
+                >
+                  <File file={childFile} />
+                </Col>
+              ))}
+            </Row>
+          </Container>
         )}
       </Container>
     </>
