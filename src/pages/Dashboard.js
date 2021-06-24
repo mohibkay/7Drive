@@ -1,17 +1,14 @@
-import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { Link, useHistory, useParams, useLocation } from "react-router-dom";
+import { Col, Container, Row } from "react-bootstrap";
+import { useParams, useLocation } from "react-router-dom";
 import AddFile from "../components/drive/AddFile";
-import AddFolderBtn from "../components/drive/AddFolderBtn";
+import AddFolder from "../components/drive/AddFolder";
 import File from "../components/drive/File";
 import Folder from "../components/drive/Folder";
 import FolderBreadcumbs from "../components/layout/FolderBreadcumbs";
 import Navbar from "../components/layout/Navbar";
-import { useAuth } from "../context/authContext";
 import { useFolder } from "../hooks/useFolder";
 
 export default function Home() {
-  const history = useHistory();
   const { folderId } = useParams();
   const { state = {} } = useLocation();
   const { folder, childFolders, childFiles } = useFolder(
@@ -26,7 +23,7 @@ export default function Home() {
         <div className="d-flex align-items-center">
           <FolderBreadcumbs currentFolder={folder} />
           <AddFile currentFolder={folder} />
-          <AddFolderBtn currentFolder={folder} />
+          <AddFolder currentFolder={folder} />
         </div>
 
         {childFolders.length > 0 && (

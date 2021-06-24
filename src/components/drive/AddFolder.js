@@ -5,7 +5,7 @@ import { database } from "../../lib/firebase";
 import { useAuth } from "../../context/authContext";
 import { ROOT_FOLDER } from "../../constants";
 
-export default function AddFolderBtn({ currentFolder }) {
+export default function AddFolder({ currentFolder }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
 
