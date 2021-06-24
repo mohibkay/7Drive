@@ -77,13 +77,25 @@ export default function AddFile({ currentFolder }) {
         });
 
         uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-          database.files.add({
-            url: url,
-            name: file.name,
-            folderId: currentFolder.id,
-            userId: userId,
-            createdAt: database.getServerTimestamp(),
-          });
+          database.files
+            .where("name", "==", file.name)
+            .where("folderId", "==", currentFolder.id)
+            .where("userId", "==", userId)
+            .get()
+            .then((existingFiles) => {
+              const [existingFile] = existingFiles.docs;
+              if (existingFile) {
+                existingFile.ref.update({ url: url });
+              } else {
+                database.files.add({
+                  url: url,
+                  name: file.name,
+                  folderId: currentFolder.id,
+                  userId: userId,
+                  createdAt: database.getServerTimestamp(),
+                });
+              }
+            });
         });
       }
     );
