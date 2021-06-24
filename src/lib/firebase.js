@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/storage";
 import "firebase/auth";
 
 const config = {
@@ -15,9 +16,15 @@ firebase.initializeApp(config);
 
 const firestore = firebase.firestore();
 export const auth = firebase.auth();
+export const storage = firebase.storage();
 export const database = {
   folders: firestore.collection("folders"),
   files: firestore.collection("files"),
+  formatDoc: (doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }),
+  getServerTimestamp: firebase.firestore.FieldValue.serverTimestamp,
 };
 
 export default firebase;

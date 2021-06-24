@@ -2,10 +2,16 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { FaFolderPlus } from "react-icons/fa";
 import { database } from "../../lib/firebase";
+import { useAuth } from "../../context/authContext";
+import { ROOT_FOLDER } from "../../constants";
 
-export default function AddFolderBtn() {
+export default function AddFolderBtn({ currentFolder }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
+
+  const {
+    currentUser: { uid: userId },
+  } = useAuth();
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => {
@@ -16,9 +22,22 @@ export default function AddFolderBtn() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (currentFolder === null) {
+      return;
+    }
+
+    const path = [...currentFolder.path];
+    if (currentFolder !== ROOT_FOLDER) {
+      path.push({ name: currentFolder.name, id: currentFolder.id });
+    }
+
     try {
       database.folders.add({
-        name: name,
+        name,
+        parentId: currentFolder.id,
+        userId,
+        path,
+        createdAt: database.getServerTimestamp(),
       });
       closeModal();
     } catch (error) {}
