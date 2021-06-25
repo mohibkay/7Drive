@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams, useLocation } from "react-router-dom";
 import AddFile from "../components/drive/AddFile";
@@ -15,6 +16,10 @@ export default function Home() {
     folderId,
     state.folder
   );
+
+  useEffect(() => {
+    document.title = "Dashboard - 7Drive";
+  }, []);
 
   return (
     <>

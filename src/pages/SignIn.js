@@ -31,7 +31,7 @@ export default function SignIn() {
   };
 
   useEffect(() => {
-    document.title = "Sign In | 7Drive";
+    document.title = "Sign In - 7Drive";
   }, []);
 
   return (

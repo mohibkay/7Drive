@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useAuth } from "../context/authContext";
@@ -10,6 +11,10 @@ export default function Profile() {
     await signOut();
     history.push("/login");
   };
+
+  useEffect(() => {
+    document.title = "Profile - 7Drive";
+  }, []);
 
   return (
     <div>
