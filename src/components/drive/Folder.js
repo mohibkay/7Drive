@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FaFolder } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { database, db } from "../../lib/firebase";
-import { useAuth } from "../../context/authContext";
 import DeleteFolder from "../modals/DeleteFolder";
 import RenameFolder from "../modals/RenameFolder";
 import Menu from "../Menu";
@@ -12,13 +11,9 @@ export default function Folder({ folder }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(folder.name);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [renameModal, setRenameModal] = useState(false);
+  const [renameModalState, setRenameModalState] = useState(false);
 
   const outerRef = useRef(null);
-
-  const {
-    currentUser: { uid: userId },
-  } = useAuth();
 
   const openModal = () => {
     console.log("ran");
@@ -80,16 +75,16 @@ export default function Folder({ folder }) {
 
       <Menu
         outerRef={outerRef}
-        setRenameModal={setRenameModal}
+        setRenameModalState={setRenameModalState}
         deleteFolder={setDeleteModal}
-        folder={folder}
+        path={`/folder/${folder.id}`}
       />
 
       <RenameFolder
-        renameModal={renameModal}
+        renameModalState={renameModalState}
         name={name}
         setName={setName}
-        setRenameModal={setRenameModal}
+        setRenameModalState={setRenameModalState}
         renameFolder={handleRenamingFolder}
       />
 

@@ -1,14 +1,14 @@
 import { Button, Modal } from "react-bootstrap";
 
 export default function RenameFolder({
-  renameModal,
-  setRenameModal,
+  renameModalState,
+  setRenameModalState,
   renameFolder,
   name,
   setName,
 }) {
   const closeModal = () => {
-    setRenameModal(false);
+    setRenameModalState(false);
   };
 
   const handleSubmit = (e) => {
@@ -19,12 +19,12 @@ export default function RenameFolder({
 
   return (
     <Modal
-      show={renameModal}
+      show={renameModalState}
       onHide={closeModal}
       centered
       //   style={{ width: "25vw" }}
     >
-      <Modal.Header>Rename Folder</Modal.Header>
+      <Modal.Header>Rename</Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit}>
           <input
