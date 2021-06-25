@@ -61,15 +61,6 @@ export default function AddFile({ currentFolder }) {
       },
 
       () => {
-        //SIMULATE TOAST ERROR
-        // setUploadingFiles((prevUploadingFiles) => {
-        //   return prevUploadingFiles.map((uploadingFile) => {
-        //     if (uploadingFile.id === id) {
-        //       return { ...uploadingFile, error: true };
-        //     }
-        //     return uploadingFile;
-        //   });
-        // });
         setUploadingFiles((prevUploadingFiles) => {
           return prevUploadingFiles.filter((uploadingFile) => {
             return uploadingFile.id !== id;
@@ -105,7 +96,12 @@ export default function AddFile({ currentFolder }) {
     <>
       <label className="btn btn-outline-success m-0 me-3">
         <FaFileUpload size="22" />
-        <input type="file" className="d-none" onChange={handleUpload} />
+        <input
+          type="file"
+          accept="image/*"
+          className="d-none"
+          onChange={handleUpload}
+        />
       </label>
 
       {uploadingFiles.length > 0 &&
