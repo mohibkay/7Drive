@@ -12,9 +12,10 @@ const config = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-firebase.initializeApp(config);
+var app = firebase.initializeApp(config);
 
 const firestore = firebase.firestore();
+export const db = firebase.firestore(app);
 export const auth = firebase.auth();
 export const storage = firebase.storage();
 export const database = {
