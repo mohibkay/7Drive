@@ -10,7 +10,7 @@ import Menu from "../Menu";
 export default function Folder({ folder }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(folder.name);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteModalState, setDeleteModalState] = useState(false);
   const [renameModalState, setRenameModalState] = useState(false);
 
   const outerRef = useRef(null);
@@ -76,7 +76,7 @@ export default function Folder({ folder }) {
       <Menu
         outerRef={outerRef}
         setRenameModalState={setRenameModalState}
-        deleteFolder={setDeleteModal}
+        setDeleteModalState={setDeleteModalState}
         path={`/folder/${folder.id}`}
       />
 
@@ -89,8 +89,8 @@ export default function Folder({ folder }) {
       />
 
       <DeleteFolder
-        deleteModal={deleteModal}
-        setDeleteModal={setDeleteModal}
+        deleteModalState={deleteModalState}
+        setDeleteModalState={setDeleteModalState}
         handleDelete={handleDelete}
       />
     </div>

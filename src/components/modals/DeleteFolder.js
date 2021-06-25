@@ -1,17 +1,18 @@
 import { Button, Modal } from "react-bootstrap";
 
 export default function DeleteFolder({
-  deleteModal,
-  setDeleteModal,
+  deleteModalState,
+  setDeleteModalState,
   handleDelete,
 }) {
   const closeModal = () => {
-    setDeleteModal(false);
+    setDeleteModalState(false);
   };
+
   return (
-    <Modal show={deleteModal} onHide={closeModal} centered>
-      <Modal.Header>Delete Folder</Modal.Header>
-      <Modal.Body>Are you sure you want to delete the folder?</Modal.Body>
+    <Modal show={deleteModalState} onHide={closeModal} centered>
+      <Modal.Header>Delete</Modal.Header>
+      <Modal.Body>Are you sure you want to delete?</Modal.Body>
       <Modal.Footer className="d-flex justify-content-start">
         <Button
           variant="outline-danger"

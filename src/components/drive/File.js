@@ -3,12 +3,14 @@ import { Card } from "react-bootstrap";
 import Menu from "../Menu";
 import RenameFolder from "../modals/RenameFolder";
 import { database } from "../../lib/firebase";
+import DeleteFolder from "../modals/DeleteFolder";
 
 export default function File({ file }) {
   const outerRef = useRef();
 
   const [name, setName] = useState(file.name);
   const [renameModalState, setRenameModalState] = useState(false);
+  const [deleteModalState, setDeleteModalState] = useState(false);
 
   const renameFile = () => {
     database.files.doc(file.id).update({
@@ -16,7 +18,10 @@ export default function File({ file }) {
     });
   };
 
-  const handleDeleteFile = () => {};
+  const handleDeleteFile = () => {
+    database.files.doc(file.id).delete();
+    setDeleteModalState(false);
+  };
 
   return (
     <>
@@ -38,8 +43,9 @@ export default function File({ file }) {
       <Menu
         outerRef={outerRef}
         setRenameModalState={setRenameModalState}
-        // deleteFolder={setDeleteModal}
+        setDeleteModalState={setDeleteModalState}
         path={file.url}
+        type="100"
       />
 
       <RenameFolder
@@ -48,6 +54,12 @@ export default function File({ file }) {
         renameFolder={renameFile}
         name={name}
         setName={setName}
+      />
+
+      <DeleteFolder
+        setDeleteModalState={setDeleteModalState}
+        deleteModalState={deleteModalState}
+        handleDelete={handleDeleteFile}
       />
     </>
   );
