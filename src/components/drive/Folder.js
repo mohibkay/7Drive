@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { database, db } from "../../lib/firebase";
 import DeleteModal from "../modals/DeleteModal";
 import RenameModal from "../modals/RenameModal";
-import Menu from "../Menu";
+import Menu from "../layout/Menu";
 
 export default function Folder({ folder }) {
   const [name, setName] = useState(folder.name);

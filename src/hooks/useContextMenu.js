@@ -8,7 +8,6 @@ const useContextMenu = (outerRef) => {
   const handleContextMenu = useCallback(
     (event) => {
       event.preventDefault();
-
       if (outerRef && outerRef.current.contains(event.target)) {
         setXPos(`${event.pageX}px`);
         setYPos(`${event.pageY}px`);
@@ -31,7 +30,7 @@ const useContextMenu = (outerRef) => {
       document.removeEventListener("click", handleClick);
       document.removeEventListener("contextmenu", handleContextMenu);
     };
-  }, [handleClick, handleContextMenu]);
+  }, []);
 
   return { xPos, yPos, menu };
 };

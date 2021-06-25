@@ -6,7 +6,8 @@ export default function NavbarComponent() {
   return (
     <Navbar
       expand="sm"
-      bg="light"
+      bg="success"
+      variant="dark"
       className="d-flex justify-content-between align-items-center"
     >
       <Container className="w-75">

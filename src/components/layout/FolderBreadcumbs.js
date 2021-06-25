@@ -24,7 +24,7 @@ export default function FolderBreadcumbs({ currentFolder }) {
               state: { folder: { ...folder, path: path.slice(1, index) } },
             },
           }}
-          className="text-truncate d-inline-block"
+          className="text-truncate d-inline-block fs-4"
           style={{ maxWidth: "150px" }}
         >
           {folder.name}
@@ -33,7 +33,7 @@ export default function FolderBreadcumbs({ currentFolder }) {
 
       {currentFolder && (
         <Breadcrumb.Item
-          className="text-truncate d-inline-block"
+          className="text-truncate d-inline-block fs-4"
           style={{ maxWidth: "200px" }}
           active
         >

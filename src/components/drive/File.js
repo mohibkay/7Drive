@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Card } from "react-bootstrap";
-import Menu from "../Menu";
+import Menu from "../layout/Menu";
 import { database } from "../../lib/firebase";
 import RenameModal from "../modals/RenameModal";
 import DeleteModal from "../modals/DeleteModal";
