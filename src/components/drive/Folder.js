@@ -5,13 +5,17 @@ import { Button } from "react-bootstrap";
 import { database, db } from "../../lib/firebase";
 import { useAuth } from "../../context/authContext";
 import DeleteFolder from "../modals/DeleteFolder";
+import RenameFolder from "../modals/RenameFolder";
 import Menu from "../Menu";
 
 export default function Folder({ folder }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState(folder.name);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [renameModal, setRenameModal] = useState(false);
 
   const outerRef = useRef(null);
+
   const {
     currentUser: { uid: userId },
   } = useAuth();
@@ -26,11 +30,9 @@ export default function Folder({ folder }) {
   };
 
   const handleRenamingFolder = () => {
-    database.files
-      .where("folderId", "==", folder.id)
-      .where("userId", "==", userId)
-      .get()
-      .then((doc) => console.log(doc));
+    database.folders.doc(folder.id).update({
+      name: name,
+    });
   };
 
   const handleDelete = async () => {
@@ -78,9 +80,17 @@ export default function Folder({ folder }) {
 
       <Menu
         outerRef={outerRef}
+        setRenameModal={setRenameModal}
         deleteFolder={setDeleteModal}
-        renameFolder={handleRenamingFolder}
         folder={folder}
+      />
+
+      <RenameFolder
+        renameModal={renameModal}
+        name={name}
+        setName={setName}
+        setRenameModal={setRenameModal}
+        renameFolder={handleRenamingFolder}
       />
 
       <DeleteFolder
