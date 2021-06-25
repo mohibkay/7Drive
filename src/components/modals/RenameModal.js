@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 export default function RenameFolder({
   renameModalState,
   setRenameModalState,
-  renameFolder,
+  renameHandler,
   name,
   setName,
 }) {
@@ -13,17 +13,12 @@ export default function RenameFolder({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    renameFolder();
+    renameHandler();
     closeModal();
   };
 
   return (
-    <Modal
-      show={renameModalState}
-      onHide={closeModal}
-      centered
-      //   style={{ width: "25vw" }}
-    >
+    <Modal show={renameModalState} onHide={closeModal} centered>
       <Modal.Header>Rename</Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit}>

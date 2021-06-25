@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { Card } from "react-bootstrap";
 import Menu from "../Menu";
-import RenameFolder from "../modals/RenameFolder";
 import { database } from "../../lib/firebase";
-import DeleteFolder from "../modals/DeleteFolder";
+import RenameModal from "../modals/RenameModal";
+import DeleteModal from "../modals/DeleteModal";
 
 export default function File({ file }) {
   const outerRef = useRef();
@@ -25,7 +25,7 @@ export default function File({ file }) {
 
   return (
     <>
-      <Card className="">
+      <Card>
         <a
           href={file.url}
           target="_blank"
@@ -39,7 +39,6 @@ export default function File({ file }) {
 
         <h5 className="text-center mt-1 text-truncate p-1">{file.name}</h5>
       </Card>
-
       <Menu
         outerRef={outerRef}
         setRenameModalState={setRenameModalState}
@@ -48,15 +47,15 @@ export default function File({ file }) {
         type="100"
       />
 
-      <RenameFolder
+      <RenameModal
         renameModalState={renameModalState}
         setRenameModalState={setRenameModalState}
-        renameFolder={renameFile}
+        renameHandler={renameFile}
         name={name}
         setName={setName}
       />
 
-      <DeleteFolder
+      <DeleteModal
         setDeleteModalState={setDeleteModalState}
         deleteModalState={deleteModalState}
         handleDelete={handleDeleteFile}

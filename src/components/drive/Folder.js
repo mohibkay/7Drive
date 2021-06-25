@@ -3,25 +3,19 @@ import { Link } from "react-router-dom";
 import { FaFolder } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { database, db } from "../../lib/firebase";
-import DeleteFolder from "../modals/DeleteFolder";
-import RenameFolder from "../modals/RenameFolder";
+import DeleteModal from "../modals/DeleteModal";
+import RenameModal from "../modals/RenameModal";
 import Menu from "../Menu";
 
 export default function Folder({ folder }) {
-  const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(folder.name);
   const [deleteModalState, setDeleteModalState] = useState(false);
   const [renameModalState, setRenameModalState] = useState(false);
 
   const outerRef = useRef(null);
 
-  const openModal = () => {
-    console.log("ran");
-    setIsOpen(true);
-  };
-
   const closeModal = () => {
-    setIsOpen(false);
+    setDeleteModalState(false);
   };
 
   const handleRenamingFolder = () => {
@@ -80,15 +74,15 @@ export default function Folder({ folder }) {
         path={`/folder/${folder.id}`}
       />
 
-      <RenameFolder
+      <RenameModal
         renameModalState={renameModalState}
         name={name}
         setName={setName}
         setRenameModalState={setRenameModalState}
-        renameFolder={handleRenamingFolder}
+        renameHandler={handleRenamingFolder}
       />
 
-      <DeleteFolder
+      <DeleteModal
         deleteModalState={deleteModalState}
         setDeleteModalState={setDeleteModalState}
         handleDelete={handleDelete}
