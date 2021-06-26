@@ -21,7 +21,7 @@ export default function SignIn() {
       setError("");
       setLoading(true);
 
-      await signIn(emailRef.current.value, passwordRef.current.value);
+      signIn(emailRef.current.value, passwordRef.current.value);
       history.push("/");
     } catch (error) {
       setError("Failed to sign in to your account");
@@ -68,11 +68,17 @@ export default function SignIn() {
               </Form>
             </Card.Body>
           </Card>
+
           <div className="w-100 text-center mt-2">
             Don't have an account?{" "}
             <Link to="/register" style={{ color: "green" }}>
               Sign Up
             </Link>
+          </div>
+
+          <div className="w-100 text-center mt-3">
+            <p className="my-0">test login email: test@test.com</p>
+            <p>password: test123</p>
           </div>
         </div>
       </Container>

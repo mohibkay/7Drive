@@ -8,7 +8,7 @@ const useContextMenu = (outerRef) => {
   const handleContextMenu = useCallback(
     (event) => {
       event.preventDefault();
-      if (outerRef && outerRef.current.contains(event.target)) {
+      if (outerRef?.current.contains(event.target)) {
         setXPos(`${event.pageX}px`);
         setYPos(`${event.pageY}px`);
         showMenu(true);
@@ -23,14 +23,25 @@ const useContextMenu = (outerRef) => {
     showMenu(false);
   }, [showMenu]);
 
+  const handleKeydown = useCallback(
+    (event) => {
+      if (event.key === "Escape") {
+        showMenu(false);
+      }
+    },
+    [showMenu]
+  );
+
   useEffect(() => {
     document.addEventListener("click", handleClick);
+    document.addEventListener("keydown", handleKeydown);
     document.addEventListener("contextmenu", handleContextMenu);
     return () => {
       document.removeEventListener("click", handleClick);
+      document.removeEventListener("keydown", handleKeydown);
       document.removeEventListener("contextmenu", handleContextMenu);
     };
-  }, [handleClick, handleContextMenu]);
+  }, [handleClick, handleContextMenu, handleKeydown]);
 
   return { xPos, yPos, menu };
 };
