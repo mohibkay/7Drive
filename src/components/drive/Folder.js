@@ -42,10 +42,9 @@ export default function Folder({ folder }) {
 
       // batch.delete(filesRef);
 
-      batch.commit().then(() => console.log("successfully deleted"));
+      batch.commit().then(() => console.log(""));
 
       closeModal();
-      console.log("deleted", folder.id);
     } catch (error) {
       console.log(error.message);
     }
