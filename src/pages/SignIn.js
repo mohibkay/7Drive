@@ -3,6 +3,7 @@ import { Alert, Button, Card, Container, Form } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import Navbar from "../components/layout/Navbar";
+import { guestLoginCred } from "../constants";
 
 export default function SignIn() {
   const emailRef = useRef();
@@ -14,20 +15,28 @@ export default function SignIn() {
   const { signIn } = useAuth();
   const history = useHistory();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleLogin = (email, password) => {
     try {
       setError("");
       setLoading(true);
 
-      signIn(emailRef.current.value, passwordRef.current.value);
+      signIn(email, password);
       history.push("/");
     } catch (error) {
       setError("Failed to sign in to your account");
       setError(error.message);
     }
     setLoading(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    handleLogin(emailRef.current.value, passwordRef.current.value);
+  };
+
+  const handleGuestLogin = () => {
+    handleLogin(guestLoginCred.email, guestLoginCred.password);
   };
 
   useEffect(() => {
@@ -65,21 +74,28 @@ export default function SignIn() {
                 >
                   Sign In
                 </Button>
+                <div className="w-100 text-center mt-2">
+                  Don't have an account?{" "}
+                  <Link to="/register" style={{ color: "green" }}>
+                    Sign Up
+                  </Link>
+                  <p className="mb-0">OR</p>
+                </div>
+
+                <div className="w-100 text-center mt-0">
+                  <Button
+                    onClick={handleGuestLogin}
+                    variant="light"
+                    disabled={loading}
+                    type="submit"
+                    className="w-100 mt-2 border border-success border-2"
+                  >
+                    Guest Login
+                  </Button>
+                </div>
               </Form>
             </Card.Body>
           </Card>
-
-          <div className="w-100 text-center mt-2">
-            Don't have an account?{" "}
-            <Link to="/register" style={{ color: "green" }}>
-              Sign Up
-            </Link>
-          </div>
-
-          <div className="w-100 text-center mt-3">
-            <p className="my-0">test login email: test@test.com</p>
-            <p>password: test123</p>
-          </div>
         </div>
       </Container>
     </>

@@ -6,3 +6,8 @@ export const ACTIONS = {
 };
 
 export const ROOT_FOLDER = { name: "Root", id: null, path: [] };
+
+export const guestLoginCred = {
+  email: "user@sevendrive.com",
+  password: "S4PJfipaBAmLywM",
+};
