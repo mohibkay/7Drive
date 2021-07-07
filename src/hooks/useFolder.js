@@ -84,7 +84,7 @@ export function useFolder(folderId = null, folder = null) {
     const listener = database.folders
       .where("parentId", "==", folderId)
       .where("userId", "==", userId)
-      // .orderBy("createdAt")
+      .orderBy("createdAt")
       .onSnapshot((snapshot) => {
         const childFolders = snapshot.docs.map(database.formatDoc);
         dispatch({
@@ -100,7 +100,7 @@ export function useFolder(folderId = null, folder = null) {
     const listener = database.files
       .where("folderId", "==", folderId)
       .where("userId", "==", userId)
-      // .orderBy("createdAt")
+      .orderBy("createdAt")
       .onSnapshot((snapshot) => {
         const childFiles = snapshot.docs.map(database.formatDoc);
         dispatch({

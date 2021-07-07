@@ -1,8 +1,17 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 
 export default function NavbarComponent() {
+  const history = useHistory();
+  const { signOut, currentUser } = useAuth();
+
+  const handleLogout = async () => {
+    await signOut();
+    history.push("/login");
+  };
+
   return (
     <Navbar
       expand="sm"
@@ -15,9 +24,11 @@ export default function NavbarComponent() {
           7Drive
         </Navbar.Brand>
         <Nav>
-          <Nav.Link as={Link} to="/profile">
-            Profile
-          </Nav.Link>
+          {currentUser && (
+            <Nav.Link as={Button} variant="success" onClick={handleLogout}>
+              Logout
+            </Nav.Link>
+          )}
         </Nav>
       </Container>
     </Navbar>

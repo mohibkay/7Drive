@@ -15,12 +15,12 @@ export default function SignIn() {
   const { signIn } = useAuth();
   const history = useHistory();
 
-  const handleLogin = (email, password) => {
+  const handleLogin = async (email, password) => {
     try {
       setError("");
       setLoading(true);
 
-      signIn(email, password);
+      await signIn(email, password);
       history.push("/");
     } catch (error) {
       setError("Failed to sign in to your account");
