@@ -31,8 +31,6 @@ export default function AddFile({ currentFolder }) {
         ? `${currentFolder.path.join("/")}/${file.name}`
         : `${currentFolder.path.join("/")}/${currentFolder.name}/${file.name}`;
 
-    console.log(filePath);
-
     const uploadTask = storage.ref(`files/${userId}/${filePath}`).put(file);
 
     uploadTask.on(
