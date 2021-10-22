@@ -24,3 +24,8 @@
 <b>Deployment</b>: Netlify
 <br>
 <br>
+
+## Functionality
+
+- Create, update, delete folders
+- Create, update, delete images
